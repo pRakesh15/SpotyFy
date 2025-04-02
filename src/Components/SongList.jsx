@@ -1,4 +1,4 @@
-
+import "../Styles/SongList.scss"
 const SongList = ({
   songs,
   currentSong,
