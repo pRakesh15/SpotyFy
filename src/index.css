@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities; */
 
+@use 'bootstrap/scss/bootstrap';
+
+@use "sass:color";
+@use "sass:math";
+
 :root {
   --background-color: #121212;
   --text-color: #ffffff;

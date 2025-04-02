@@ -1,12 +1,9 @@
-import { MoreHorizontal, Heart, HeartIcon as HeartFill } from "lucide-react";
 
 const SongList = ({
   songs,
   currentSong,
   onSongSelect,
   isPlaying,
-  favorites,
-  onToggleFavorite,
 }) => {
     return (
         <div className="song-list-container">

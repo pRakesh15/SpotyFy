@@ -1,4 +1,3 @@
-import { Music } from "lucide-react";
 import React from "react";
 import "../Styles/SideBar.scss";
 

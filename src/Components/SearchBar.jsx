@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Search } from "lucide-react"
 import '../Styles/SearchBar.scss' // Import the SCSS file
 
 const SearchBar = ({ onSearch }) => {

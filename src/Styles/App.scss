@@ -1,5 +1,7 @@
-@import 'bootstrap/scss/bootstrap';
+@use 'bootstrap/scss/bootstrap';
 
+@use "sass:color";
+@use "sass:math";
 // Variables
 $background-color: #121212;
 $text-color: #ffffff;
