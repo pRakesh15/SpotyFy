@@ -5,11 +5,7 @@ import SongList from "./Components/SongList"
 import Player from "./Components/Player"
 import SearchBar from "./Components/SearchBar"
 import { songsData } from "./Data/Songs.js"
-import "./styles/App.scss"
-import "./styles/Player.scss"
-import "./styles/SideBar.scss"
-import "./styles/SearchBar.scss"
-import "./styles/SongList.scss"
+import "./Styles/App.scss"
 
 
 const App = () => {
