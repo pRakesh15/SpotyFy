@@ -1,0 +1,209 @@
+@import 'bootstrap/scss/bootstrap';
+
+// Variables
+$background-color: #121212;
+$text-color: #ffffff;
+$text-secondary: #b3b3b3;
+$accent-color: #1db954;
+$hover-color: rgba(255, 255, 255, 0.1);
+
+// Global styles
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: $text-color;
+  background-color: $background-color;
+}
+
+#root {
+  height: 100%;
+}
+
+.app-container {
+  height: 100vh;
+  overflow: hidden;
+  transition: background 1s ease;
+}
+
+// Main Content
+.main-content {
+  overflow-y: auto;
+  height: 100vh;
+  padding: 1rem;
+
+  .main-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    color: #ffffff;
+  }
+
+  /* Hide scrollbar */
+  &::-webkit-scrollbar {
+    width: 0px;
+    display: none;
+  }
+
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
+  @media (max-width: 768px) {
+    padding-bottom: 100px; // Ensure space for the player
+  }
+}
+
+// Sidebar
+.sidebar-container {
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+  padding: 2rem;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .logo svg {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.5rem;
+  }
+
+  .logo span {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .nav-link {
+    font-size: 1.2rem;
+    color: $text-secondary;
+    margin: 0.5rem 0;
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: $text-color;
+    }
+
+    &.active {
+      color: $accent-color;
+      font-weight: 700;
+    }
+  }
+
+  @media (max-width: 768px) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: black;
+    transform: translateX(-100%);
+    z-index: 1000;
+    padding: 1.5rem;
+
+    &.d-block {
+      transform: translateX(0);
+    }
+  }
+}
+
+// Player
+.player-container {
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 768px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: black;
+    z-index: 1000;
+  }
+
+  .player-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    color: $text-color;
+
+    .play-pause-btn {
+      background-color: $accent-color;
+      border: none;
+      padding: 0.5rem;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .song-info {
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .volume-control {
+      width: 100px;
+    }
+  }
+}
+
+// Hide scrollbar globally
+::-webkit-scrollbar {
+  display: none;
+}
+
+// Menu Toggle Button
+.menu-toggle {
+  color: $text-color;
+  text-decoration: none;
+
+  &:hover, &:focus {
+    color: $accent-color;
+  }
+
+  &.show {
+    display: none;
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+// Responsive Styles
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-top: 1rem;
+  }
+
+  .player-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+  }
+}

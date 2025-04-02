@@ -1,0 +1,77 @@
+$active-color: #ffffff;
+$inactive-color: #b3b3b3;
+$background-color: rgba(0, 0, 0, 0.3);
+
+.sidebar {
+  height: 100%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  background-color: $background-color;
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    .logo-icon {
+      font-size: 1.8rem;
+      margin-right: 0.5rem;
+      height: 1.8rem;
+      width:1.8rem;
+   
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+  }
+  .sidebar-bottom {
+    display: flex;
+    justify-content: start;
+    padding: 20px 0;
+    margin-top: 130%;
+
+    .bottom-logo {
+      width: 36px;  // Adjust as needed
+      height: 40px;
+      border-radius: 50%;
+    }
+  }
+
+  .sidebar-nav {
+    .nav-link {
+      color: $inactive-color;
+      padding: 0.75rem 0;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $active-color;
+      }
+
+      &.active {
+        color: $active-color;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Animation for sidebar
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    animation: slideIn 0.3s ease;
+  }
+}

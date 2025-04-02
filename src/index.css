@@ -1,0 +1,96 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+:root {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --text-secondary: #b3b3b3;
+  --accent-color: #1db954;
+  --hover-color: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes expandWidth {
+  from {
+    width: 80%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes soundBar1 {
+  0% {
+    height: 3px;
+  }
+  50% {
+    height: 12px;
+  }
+  100% {
+    height: 3px;
+  }
+}
+
+@keyframes soundBar2 {
+  0% {
+    height: 6px;
+  }
+  50% {
+    height: 15px;
+  }
+  100% {
+    height: 6px;
+  }
+}
+
+@keyframes soundBar3 {
+  0% {
+    height: 4px;
+  }
+  50% {
+    height: 10px;
+  }
+  100% {
+    height: 4px;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-expandWidth {
+  animation: expandWidth 0.3s ease forwards;
+}
+
+.animate-soundBar1 {
+  animation: soundBar1 1s ease infinite;
+}
+
+.animate-soundBar2 {
+  animation: soundBar2 1.2s ease infinite;
+}
+
+.animate-soundBar3 {
+  animation: soundBar3 0.8s ease infinite;
+}
+
