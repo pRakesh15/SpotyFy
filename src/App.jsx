@@ -6,6 +6,7 @@ import Player from "./Components/Player"
 import SearchBar from "./Components/SearchBar"
 import { songsData } from "./Data/Songs.js"
 import "./Styles/App.scss"
+import { Menu, X } from "lucide-react"
 
 
 const App = () => {
@@ -32,6 +33,8 @@ const App = () => {
       setRecentlyPlayed(JSON.parse(storedRecentlyPlayed))
     }
   }, [])
+
+    
 
   // Save favorites to localStorage when updated
   useEffect(() => {
@@ -100,6 +103,10 @@ const App = () => {
   const handleTabChange = (tab) => {
     setActiveTab(tab)
 
+    if (window.innerWidth < 768) {
+      setShowSidebar(false); // Close sidebar only on mobile screens
+    }
+
     if (tab === "forYou") {
       setFilteredSongs(songsData)
     } else if (tab === "favorites") {
@@ -148,7 +155,7 @@ const App = () => {
                 {activeTab === "forYou" ? "For You" : activeTab === "favorites" ? "Favorites" : "Recently Played"}
               </h1>
               <Button variant="link" className="menu-toggle d-md-none" onClick={() => setShowSidebar(!showSidebar)}>
-                {showSidebar ? "Hide Menu" : "Show Menu"}
+              {showSidebar ? <X size={24} /> : <Menu size={24} />}
               </Button>
             </div>
   

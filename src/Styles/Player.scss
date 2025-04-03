@@ -7,9 +7,7 @@ $hover-color: rgba(255, 255, 255, 0.1);
 
 .player {
   height: 100%;
-  padding: 3rem;
-  padding-left: 4.2rem;
-  padding-right: 4.2rem;
+  padding: 3rem 4.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,14 +17,12 @@ $hover-color: rgba(255, 255, 255, 0.1);
     text-align: start;
     margin-bottom: 1.5rem;
     margin-right: 18rem;
-    
 
     .song-title {
       font-size: 1.5rem;
       font-weight: 700;
       margin-bottom: 0.25rem;
       color: white;
-      align-items: start;
     }
 
     .song-artist {
@@ -60,6 +56,7 @@ $hover-color: rgba(255, 255, 255, 0.1);
       .progress-bar {
         background-color: $text-color;
         transition: width 0.1s linear;
+        height: 100%;
       }
     }
 
@@ -131,63 +128,109 @@ $hover-color: rgba(255, 255, 255, 0.1);
   animation: fadeIn 0.5s ease;
 }
 
-// Responsive styles
-@media (max-width: 767px) {
+// Responsive styles for mobile
+@media (max-width: 786px) {
   .player {
-    padding: 1rem;
-    flex-direction: row;
-    height: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: black;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    justify-content: space-between;
+    transition: transform 0.3s ease-in-out;
 
-    .song-info {
-      text-align: left;
-      margin-bottom: 0;
-      flex: 1;
-
-      .song-title {
-        font-size: 1rem;
-      }
+    &.expanded {
+      height: 100%;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
     }
 
     .album-cover {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
       margin-right: 1rem;
-      margin-bottom: 0;
     }
 
-    .progress-container,
+    .song-info {
+      flex: 1;
+      text-align: left;
+      
+      .song-title {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: white;
+      }
+    }
+
     .controls {
-      display: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .control-button {
+        font-size: 1.2rem;
+        color: white;
+      }
+    }
+  }
+
+  // Mobile Bottom Bar View
+  .player-bar {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.9);
     }
 
-    &.expanded {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+    .player-bar-thumbnail {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      margin-right: 1rem;
+    }
+
+    .player-bar-info {
+      flex: 1;
+      display: flex;
       flex-direction: column;
-      z-index: 1000;
+      justify-content: center;
 
-      .album-cover {
-        width: 80%;
-        height: auto;
-        margin-right: 0;
-        margin-bottom: 2rem;
+      .player-bar-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: white;
       }
+    }
 
-      .song-info {
-        text-align: center;
-        margin-bottom: 1.5rem;
+    .control-button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      margin-left: 0.5rem;
+      transition: transform 0.2s ease;
 
-        .song-title {
-          font-size: 1.5rem;
-        }
-      }
-
-      .progress-container,
-      .controls {
-        display: block;
+      &:hover {
+        color: $accent-color;
+        transform: scale(1.1);
       }
     }
   }

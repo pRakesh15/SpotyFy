@@ -7,6 +7,16 @@ const Player = ({ song, isPlaying, onTogglePlay, onNext, onPrevious, audioRef, i
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 786);
+
+  // Update responsive state on resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 786);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Update progress bar
   useEffect(() => {
@@ -14,14 +24,12 @@ const Player = ({ song, isPlaying, onTogglePlay, onNext, onPrevious, audioRef, i
       const updateProgress = () => {
         const current = audioRef.current.currentTime;
         const duration = audioRef.current.duration;
-
         if (duration) {
           setProgress((current / duration) * 100);
           setCurrentTime(current);
           setDuration(duration);
         }
       };
-
       audioRef.current.addEventListener("timeupdate", updateProgress);
       return () => audioRef.current?.removeEventListener("timeupdate", updateProgress);
     }
@@ -42,30 +50,29 @@ const Player = ({ song, isPlaying, onTogglePlay, onNext, onPrevious, audioRef, i
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  // Toggle mobile player expansion
-  const toggleExpand = () => setIsExpanded(!isExpanded);
-  
-  // Responsive logic
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-
   return (
-    <div className={`player ${isMobile ? (isExpanded ? "expanded" : "collapsed") : ""}`}>
-      {isMobile && !isExpanded && (
-        <div className="player-preview" onClick={toggleExpand}>
-          <img src={song.thumbnail || "/placeholder.svg?height=50&width=50"} alt={song.title} className="preview-thumbnail" />
-          <div className="preview-info">
-            <h3 className="preview-title">{song.title}</h3>
-            <p className="preview-artist">{song.artistName}</p>
+    <div className={`player ${isMobile ? "mobile-player" : ""} ${isExpanded ? "expanded" : ""}`}>
+      {isMobile && !isExpanded ? (
+        // Mobile Bottom Bar View
+        <div className="player-bar" onClick={() => setIsExpanded(true)}>
+          <img src={song.thumbnail || "/placeholder.svg"} alt={song.title} className="player-bar-thumbnail" />
+          <div className="player-bar-info">
+            <h3 className="player-bar-title">{song.title}</h3>
           </div>
-          <button className="play-button-small" onClick={(e) => { e.stopPropagation(); onTogglePlay(); }}>
+          <button className="control-button" onClick={(e) => { e.stopPropagation(); onToggleFavorite(); }}>
+            {isFavorite ? <HeartFill className="icon favorite" /> : <Heart className="icon" />}
+          </button>
+          <button className="control-button" onClick={(e) => { e.stopPropagation(); onTogglePlay(); }}>
             {isPlaying ? <Pause className="icon" /> : <Play className="icon" />}
           </button>
+          <button className="control-button">
+            <Volume2 className="icon" />
+          </button>
         </div>
-      )}
-      
-      {(!isMobile || isExpanded) && (
+      ) : (
+        // Full Player View
         <>
-          {isMobile && <button className="back-button" onClick={toggleExpand}>Back</button>}
+          {isMobile && <button className="back-button" onClick={() => setIsExpanded(false)}>Back</button>}
 
           <div className="song-info">
             <h2 className="song-title">{song.title}</h2>
@@ -73,7 +80,7 @@ const Player = ({ song, isPlaying, onTogglePlay, onNext, onPrevious, audioRef, i
           </div>
 
           <div className="album-cover">
-            <img src={song.thumbnail || "/placeholder.svg?height=300&width=300"} alt={song.title} className="cover-image" />
+            <img src={song.thumbnail || "/placeholder.svg"} alt={song.title} className="cover-image" />
           </div>
 
           <div className="progress-container">

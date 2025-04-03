@@ -60,9 +60,10 @@ body, html {
 // Sidebar
 .sidebar-container {
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.8); // Darker for better visibility
   transition: transform 0.3s ease-in-out;
   padding: 2rem;
+  position: relative; // Ensure it stays in place
 
   .logo {
     display: flex;
@@ -98,19 +99,23 @@ body, html {
     }
   }
 
+  /* ✅ Mobile Responsive */
   @media (max-width: 768px) {
     position: fixed;
     left: 0;
     top: 0;
     width: 250px;
     height: 100%;
-    background: black;
+    background: rgba(0, 0, 0, 0.9); // Ensure visibility
     transform: translateX(-100%);
     z-index: 1000;
     padding: 1.5rem;
+    overflow-y: auto; // Prevent content overflow
 
+    /* ✅ Make sure sidebar does not block clicks */
     &.d-block {
       transform: translateX(0);
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
     }
   }
 }
@@ -120,14 +125,27 @@ body, html {
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);
 
-  @media (max-width: 768px) {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: black;
-    z-index: 1000;
+  @media (max-width: 786px) {
+    .main-content {
+      padding: 1rem;
+    }
+  
+    .player-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: black;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+    }
+  
+    .menu-toggle {
+      display: block;
+      margin-top: 1rem;
+    }
   }
 
   .player-controls {
@@ -135,10 +153,10 @@ body, html {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    color: $text-color;
+    color: white;
 
     .play-pause-btn {
-      background-color: $accent-color;
+      background-color: #1db954;
       border: none;
       padding: 0.5rem;
       border-radius: 50%;
@@ -163,18 +181,21 @@ body, html {
 
 // Menu Toggle Button
 .menu-toggle {
-  color: $text-color;
-  text-decoration: none;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1100; // Higher than sidebar
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
 
-  &:hover, &:focus {
-    color: $accent-color;
-  }
-
-  &.show {
-    display: none;
+  &:hover {
+    background: rgba(255, 255, 255, 0.4);
   }
 }
-
 // Animations
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -191,11 +212,6 @@ body, html {
     padding: 1rem;
   }
 
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .menu-toggle {
     display: block;
     margin-top: 1rem;
@@ -207,5 +223,6 @@ body, html {
     left: 0;
     right: 0;
     height: 80px;
+    z-index: 2000;
   }
 }
