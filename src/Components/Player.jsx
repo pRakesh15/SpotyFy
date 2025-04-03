@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Play, Pause, SkipBack, SkipForward, Volume2, Heart, Heart as HeartFill } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, Volume2, Heart, Heart as HeartFill, ChevronDown } from "lucide-react";
 import "../Styles/Player.scss";
 
 const Player = ({ song, isPlaying, onTogglePlay, onNext, onPrevious, audioRef, isFavorite, onToggleFavorite }) => {
@@ -72,8 +72,11 @@ const Player = ({ song, isPlaying, onTogglePlay, onNext, onPrevious, audioRef, i
       ) : (
         // Full Player View
         <>
-          {isMobile && <button className="back-button" onClick={() => setIsExpanded(false)}>Back</button>}
-
+        {isMobile && (
+          <button className="back-button" onClick={() => setIsExpanded(false)}>
+            <ChevronDown size={24} />
+          </button>
+        )}
           <div className="song-info">
             <h2 className="song-title">{song.title}</h2>
             <p className="song-artist">{song.artistName}</p>
